@@ -21,11 +21,11 @@ n = 0.0
 s = 0.0
 lam = 1.0
 nu = 4.0
-A = 0.5
+A = 0.4
 params = [a, b, n, s, nu, lam, A]
-mspan = [1e-9, 100.0]
+mspan = [0, 100.0]
 m_eval = np.arange(mspan[0], mspan[-1], 0.001)
-y0 = [1.0, 1e-3, 1.0, 0.0]
+y0 = [1.0, 1e-4, 1.0, 0.0]
 
 # We want to find where p(m) goes to zero. So we define an event function
 def hit_surface(m, y, params):
@@ -36,6 +36,7 @@ hit_surface.direction = -1
 sol1 = solve_ivp(stellar_structure, mspan, y0, t_eval=m_eval, args=(params,), events=hit_surface)
 mstar = sol1.t_events
 print(mstar)
+print(sol1.y[0])
 # Let's also plot p(m) vs m to see where it becomes zero.
 fig, ax = plt.subplots(nrows=1, ncols=1)
 ax.plot(sol1.t, sol1.y[0])

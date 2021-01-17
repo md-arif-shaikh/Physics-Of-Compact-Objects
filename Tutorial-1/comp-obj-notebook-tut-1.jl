@@ -7,6 +7,8 @@ using InteractiveUtils
 # ╔═╡ 17ce391a-58a1-11eb-0cc3-27ab49468914
 begin
 	using DifferentialEquations
+	using ODEInterfaceDiffEq
+	using ODEInterface
 	using Printf
 	using Plots
 	using LaTeXStrings
@@ -37,7 +39,7 @@ md"**Callback function**
 We want to know the value of $m$ where $p$ goes to zero. For this we need to use the callback function. First we set the condtion i.e $p$ goes to zero at the event. In practical we set a value below which say that p is sufficiently small."
 
 # ╔═╡ fd2312b8-58a1-11eb-2e96-a94a16e0e8ca
-condition(m, u, integrator) =  u[1] - 1e-4;
+condition(u, m, integrator) =  u[1] - 1e-4;
 
 # ╔═╡ 6d9108e4-58a3-11eb-2bf7-e78d60fe87f4
 md"We then need to specify what to do when the event is detected, i.e., the condition is satisfied. We here want to just stop the integration. This is done using the following"
@@ -83,7 +85,7 @@ end
 md"We also need specify the domain of integration"
 
 # ╔═╡ cb8fa8bc-58a4-11eb-066f-915f0c57d6fa
-mspan = (1e-12, 10.0)
+mspan = (1e-9, 100.0)
 
 # ╔═╡ dea60fd6-58a4-11eb-1656-6fe62b037ed4
 md"**Solve ODE**
@@ -94,17 +96,27 @@ Now we are ready to set the ODE problem"
 problem1 = ODEProblem(stellar_structure!, u0, mspan, params);
 
 # ╔═╡ 1141ef96-58a5-11eb-347e-b1a3fc705b0c
-solution1 = solve(problem1, alg_hints=[:stiff], callback=cb)
+solution1 = solve(problem1, alg=RadauIIA5(), callback=cb)
+
+# ╔═╡ 93817b8e-58aa-11eb-3116-4f4be1645bc3
+solution1.t[end]
+
+# ╔═╡ 9d037e8c-58aa-11eb-0cd2-818a684914fe
+solution1.u[end]
 
 # ╔═╡ 61558144-58a7-11eb-3b11-9dd48ad009a5
 md"**Plot Solution**"
 
 # ╔═╡ 3b294794-58a7-11eb-1380-df7639e7dd2f
-plot(solution1, vars=(2, 1), lw = 2, xaxis = (L"m"), yaxis = (L"p(m)"))
+begin
+	plot(solution1, vars=(0, 1), lw = 2, label = L"p")
+	plot!(solution1, vars=(0, 3), lw = 2, label = L"t")
+	plot!(xaxis = (L"m"))
+end
 
 # ╔═╡ Cell order:
 # ╠═17ce391a-58a1-11eb-0cc3-27ab49468914
-# ╟─50faac0c-58a2-11eb-0b45-913e36bec28c
+# ╠═50faac0c-58a2-11eb-0b45-913e36bec28c
 # ╠═abe0e024-58a1-11eb-3d89-45c25419d716
 # ╟─1863311a-58a3-11eb-18ca-bfa5e090d38e
 # ╠═fd2312b8-58a1-11eb-2e96-a94a16e0e8ca
@@ -120,5 +132,7 @@ plot(solution1, vars=(2, 1), lw = 2, xaxis = (L"m"), yaxis = (L"p(m)"))
 # ╟─dea60fd6-58a4-11eb-1656-6fe62b037ed4
 # ╠═ec10984e-58a4-11eb-14c6-c5b8b047b955
 # ╠═1141ef96-58a5-11eb-347e-b1a3fc705b0c
+# ╠═93817b8e-58aa-11eb-3116-4f4be1645bc3
+# ╠═9d037e8c-58aa-11eb-0cd2-818a684914fe
 # ╟─61558144-58a7-11eb-3b11-9dd48ad009a5
 # ╠═3b294794-58a7-11eb-1380-df7639e7dd2f

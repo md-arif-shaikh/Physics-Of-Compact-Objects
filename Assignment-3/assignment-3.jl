@@ -26,7 +26,7 @@ rfinal = 10 * u"km"
 mass = 1.4 * u"Msun"
 
 # ╔═╡ fe84e7fa-6213-11eb-3024-b50806285bd5
-G = 6.67430 * 1e-11 * u"m^3/kg/s^2"
+G = u"GMsun"/u"Msun"
 
 # ╔═╡ 4cac0352-6212-11eb-2dd2-3370a67a7b01
 function EngCoreCollapse(rini, rfinal, mass)
@@ -85,7 +85,7 @@ dL = uconvert(u"m", 1e4 * u"pc")
 Flux = Nnutrino / (4*pi*dL^2)
 
 # ╔═╡ Cell order:
-# ╠═dabacae4-6211-11eb-24e6-0f01be7534c2
+# ╟─dabacae4-6211-11eb-24e6-0f01be7534c2
 # ╟─13fff7ca-6212-11eb-077c-7947cfdc39c8
 # ╟─2d4e997a-6212-11eb-3671-c55e57a35aa6
 # ╠═4cac0352-6212-11eb-2dd2-3370a67a7b01

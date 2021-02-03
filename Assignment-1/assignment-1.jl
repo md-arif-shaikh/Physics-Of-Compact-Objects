@@ -1,19 +1,17 @@
 ### A Pluto.jl notebook ###
-# v0.12.18
+# v0.12.20
 
 using Markdown
 using InteractiveUtils
 
 # ╔═╡ 17ce391a-58a1-11eb-0cc3-27ab49468914
-begin
-	using DifferentialEquations
-	using ODEInterfaceDiffEq
-	using ODEInterface
-	using Printf
-	using Plots
-	using LaTeXStrings
-	gr()
-end
+using DifferentialEquations
+
+# ╔═╡ 45f4efec-65f0-11eb-1a0a-3788d5efdc78
+using StaticArrays
+
+# ╔═╡ 402dc84e-65f1-11eb-2539-37f0fe257197
+using Plots
 
 # ╔═╡ 50faac0c-58a2-11eb-0b45-913e36bec28c
 md"**ODEs**
@@ -24,13 +22,14 @@ $$\frac{dp}{dm} = - \frac{m}{x^4}, \frac{dx}{dm} = \frac{t^b}{x^2p^a}, \frac{dt}
 "
 
 # ╔═╡ abe0e024-58a1-11eb-3d89-45c25419d716
-function stellar_structure!(du, u, params, m)
+function stellar_structure(u, params, m)
     a, b, n, s, ν, λ, A = params
     p, x, t, l = u
-    du[1] = - (m / x^4)
-    du[2] = (t^b / (x^2 * p^a))
-    du[3] = - (p^(a * n) * l) / (x^4 * t^(3 + s + b * n))
-    du[4] = A * p^(a * λ) * t^(ν - (b * λ))
+    dp = - (m / x^4)
+    dx = (t^b / (x^2 * p^a))
+    dt = - (p^(a * n) * l) / (x^4 * t^(3 + s + b * n))
+    dl = A * p^(a * λ) * t^(ν - (b * λ))
+	@SVector [dp, dx, dt, dl]
 end
 
 # ╔═╡ 1863311a-58a3-11eb-18ca-bfa5e090d38e
@@ -76,7 +75,7 @@ begin
 	x0 = 1e-4
 	t0 = 1.0
 	l0 = 0.0
-	u0 = [p0, x0, t0, l0]
+	u0 = @SVector [p0, x0, t0, l0]
 end
 
 # ╔═╡ be3c61d2-58a4-11eb-0b28-e7092c004530
@@ -93,11 +92,11 @@ Now we are ready to set the ODE problem"
 # ╔═╡ ec10984e-58a4-11eb-14c6-c5b8b047b955
 begin
 	params1 = [a, b, n, s, ν, λ, 0.5]
-	problem1 = ODEProblem(stellar_structure!, u0, mspan, params1);
+	problem1 = ODEProblem(stellar_structure, u0, mspan, params1);
 end
 
 # ╔═╡ 1141ef96-58a5-11eb-347e-b1a3fc705b0c
-solution1 = solve(problem1, alg=RadauIIA5(), callback=cb)
+solution1 = solve(problem1, callback=cb)
 
 # ╔═╡ 93817b8e-58aa-11eb-3116-4f4be1645bc3
 solution1.t[end]
@@ -108,51 +107,50 @@ solution1.u[end]
 # ╔═╡ 61558144-58a7-11eb-3b11-9dd48ad009a5
 md"**Plot Solution**"
 
-# ╔═╡ 3b294794-58a7-11eb-1380-df7639e7dd2f
+# ╔═╡ 9cdff58c-65f4-11eb-0704-47631de5b2a4
+gr()
+
+# ╔═╡ cf7cd588-65f3-11eb-0f95-97a0bc0c586d
 begin
-	plot(solution1, vars=(0, 1), lw = 2, label = L"p")
-	plot!(solution1, vars=(0, 3), lw = 2, label = L"t")
-	plot!(xaxis = (L"m"))
+	colors = [:red, :green, :blue, :orange]
+	labels = ["p", "x", "t", "m"]
+	styles = [:solid, :dash, :dot, :dashdot]
+end
+
+# ╔═╡ 7c9d4d50-65f2-11eb-282b-f55027ec1222
+begin
+	global p = plot()
+	for idx in 1:4
+		global p = plot!(solution1, vars = (0, idx), color = colors[idx], ls = styles[idx], label = labels[idx])
+	end
+	plot!(xlim = (0, 100), ylim = (0, 1))
 end
 
 # ╔═╡ 4aec840e-58d7-11eb-2f48-93558ced3c13
 md"Let us now find A for which p and t goes zero at the same value of m"
 
-# ╔═╡ cdcabcfa-58d8-11eb-0c57-fd424b695d8b
-p = plot(yaxis=(L"p", [0, 1e-3]));
-
-# ╔═╡ 61e035f2-58d7-11eb-0d71-6ddb7d0caec9
-for A in 0.533:0.0001:0.534
-	mspan = (0, 20.0)
-	params = [a, b, n, s, ν, λ, A]
-	problem = ODEProblem(stellar_structure!, u0, mspan, params)
-	solution = solve(problem, alg=RadauIIA5(), callback=cb)
-	plot!(p, solution, vars=(0, 1), lw = 1, ls=:dash, xaxis=(L"m", [10, 20]), label = ("p for A=$A"))
-	plot!(p, solution, vars=(0, 3), lw = 1, ls=:solid, xaxis=(L"m", [10, 20]), label = ("t for A=$A"))
+# ╔═╡ b835d0fa-65f5-11eb-34b7-8f18d3a7ef68
+begin
+	params2 = [a, b, n, s, ν, λ, 0.534]
+	problem2 = ODEProblem(stellar_structure, u0, mspan, params2);
 end
 
-# ╔═╡ 187cf9e2-58da-11eb-1fec-eb037970104e
-p
+# ╔═╡ d1872548-65f5-11eb-02b5-c184e4141842
+solution2 = solve(problem2, callback = cb)
 
-# ╔═╡ 820e5c66-58e4-11eb-129d-e782fce95570
-pl = plot(yaxis=(L"p"));
-
-# ╔═╡ 6dc50840-58e4-11eb-1517-2f9885ae55c0
-for A in [0.535]
-	mspan = (0, 20.0)
-	params = [a, b, n, s, ν, λ, A]
-	problem = ODEProblem(stellar_structure!, u0, mspan, params)
-	solution = solve(problem, alg=RadauIIA5(), callback=cb)
-	plot!(pl, solution, vars=(0, 1), lw = 1, ls=:dash, xaxis=(L"m", [0, 12]), label = ("p for A=$A"))
-	plot!(pl, solution, vars=(0, 3), lw = 1, ls=:solid, xaxis=(L"m", [0, 12]), label = ("t for A=$A"))
+# ╔═╡ e8eda41e-65f5-11eb-133b-e7140ded270b
+begin
+	global p2 = plot()
+	for idx in 1:4
+		global p2 = plot!(solution2, vars = (0, idx), color = colors[idx], ls = styles[idx], label = labels[idx])
+	end
+	plot!(xlim = (0, 12), ylim = (0, 1))
 end
-
-# ╔═╡ 9cbdc696-58e4-11eb-15a8-95ae1c485677
-pl
 
 # ╔═╡ Cell order:
 # ╠═17ce391a-58a1-11eb-0cc3-27ab49468914
 # ╟─50faac0c-58a2-11eb-0b45-913e36bec28c
+# ╠═45f4efec-65f0-11eb-1a0a-3788d5efdc78
 # ╠═abe0e024-58a1-11eb-3d89-45c25419d716
 # ╟─1863311a-58a3-11eb-18ca-bfa5e090d38e
 # ╠═fd2312b8-58a1-11eb-2e96-a94a16e0e8ca
@@ -171,11 +169,11 @@ pl
 # ╠═93817b8e-58aa-11eb-3116-4f4be1645bc3
 # ╠═9d037e8c-58aa-11eb-0cd2-818a684914fe
 # ╟─61558144-58a7-11eb-3b11-9dd48ad009a5
-# ╠═3b294794-58a7-11eb-1380-df7639e7dd2f
+# ╠═402dc84e-65f1-11eb-2539-37f0fe257197
+# ╠═9cdff58c-65f4-11eb-0704-47631de5b2a4
+# ╠═cf7cd588-65f3-11eb-0f95-97a0bc0c586d
+# ╠═7c9d4d50-65f2-11eb-282b-f55027ec1222
 # ╟─4aec840e-58d7-11eb-2f48-93558ced3c13
-# ╠═cdcabcfa-58d8-11eb-0c57-fd424b695d8b
-# ╠═61e035f2-58d7-11eb-0d71-6ddb7d0caec9
-# ╠═187cf9e2-58da-11eb-1fec-eb037970104e
-# ╠═820e5c66-58e4-11eb-129d-e782fce95570
-# ╠═6dc50840-58e4-11eb-1517-2f9885ae55c0
-# ╠═9cbdc696-58e4-11eb-15a8-95ae1c485677
+# ╠═b835d0fa-65f5-11eb-34b7-8f18d3a7ef68
+# ╠═d1872548-65f5-11eb-02b5-c184e4141842
+# ╠═e8eda41e-65f5-11eb-133b-e7140ded270b

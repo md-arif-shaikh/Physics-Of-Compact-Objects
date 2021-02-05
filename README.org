@@ -1,0 +1,23 @@
+* Physics-Of-Compact-Objects
+Codes and resources for the course on Physics of Compact Objects taught by Prof Ajith at ICTS Jan-April 2021
+
+* Programming Language of choice
+  I have chosen [[https://julialang.org/][julia]] to be the main programming language for solving
+  all the assignments related to this course. The notebooks are to be
+  run with [[https://github.com/fonsp/Pluto.jl][Pluto]]. Insturctions for installing and running Pluto could
+  be found in the github repo. For convenience of viewing I have also
+  uploaded the pdf versions of the notebooks. Links to the exported
+  pdfs are given below.
+
+* Main pdf containing the assignments
+This pdf is prepared by Prof. Ajith for the course and I have not
+contributed to this in any way.
+- [[./CompactObjTutorial.pdf][Assignments]]
+
+* Julia notebooks containing solutions
+- [[./Assignment-1/assignment-1.jl][Assignment-1]]
+- [[./Assignment-3/assignment-3.jl][Assignment-3]]
+- [[./Assignment-4/assignment-4.jl][Assignment-4]]
+
+* PDFs exported from julia notebooks
+- [[./Assignment-4/assignment-4-sol.pdf][Assignment-4]]

@@ -4,6 +4,9 @@
 using Markdown
 using InteractiveUtils
 
+# ╔═╡ 6be49f08-6894-11eb-307f-6d65bf5f9130
+using Unitful, UnitfulAtomic
+
 # ╔═╡ fa72a230-6612-11eb-2c8c-41f072db62c8
 using DifferentialEquations
 
@@ -20,7 +23,7 @@ using LaTeXStrings
 using DataFrames
 
 # ╔═╡ 3c0653ec-67ba-11eb-1bce-e5ec4c92989e
-using Unitful, UnitfulAstro
+using UnitfulAstro
 
 # ╔═╡ c7ffa252-660e-11eb-381b-2f2ceec373c1
 md"## white dwarfs"
@@ -43,43 +46,42 @@ where $v_p$ is the velocity associated with momentum $p$.
 "
 
 # ╔═╡ b71be1a4-6793-11eb-0012-dba495d16df2
-md"Let us consider the pressure in the $z$ direction. The component of velocity of along the $z$ direction would be given by $v \cos\theta$ where $\theta$ is the angle of the velocity vector with the $z$ axis.
-
+md"Let us consider the pressure due to a particle moving at an angle $\theta$ with the $z$ direction. The component of velocity along $z$ would be given by $v \cos\theta$
 
 $v_z = v \cos\theta$
 
 and therefore,
 
-$p_z = p \cos\theta$
+$p_z = p \cos\theta.$
 
-Now the number of particles in a volume element $d^3p$ in momentum space with momentum between $p$ and $p +dp$ is
-
-$d^3p = p^2 dp\sin\theta d\theta d\phi$
-
-Now the rate of change of momentum is given by
+The rate of change of momentum is given by
 
 $\frac{p_z}{\Delta z/v_z} = \frac{p_z v_z}{\Delta z} = \frac{p v \cos^2\theta}{\Delta z}$
 
-So the pressure per particle is 
+So pressure per particle moving at an angle $\theta$ is 
 
-$\frac{p v \cos^2\theta}{\Delta z \Delta x \Delta y} = \frac{p v \cos^2\theta}{V}$
+$\frac{p v \cos^2\theta}{\Delta z \Delta x \Delta y} = \frac{p v \cos^2\theta}{V}.$
 
-So the total pressure would be given by 
+The total pressure for all particles moving at an angle $\theta$ would be given by 
 
-$P = \int_0^\infty \frac{p v \cos^2\theta}{V} N(p) dp$
+$P = \int_0^\infty \frac{p v \cos^2\theta}{V} N(p, \theta) dp$
 
-where $N(p)$ is the total number of particles with momentum between $p$ and $p+dp$ and with angle $\theta$ to $\theta + d\theta$ which is $2\pi p^2 dp\sin\theta d\theta$ (which is obtained by integrating $d^3p$ over $\phi$)
+where $N(p, \theta)$ is the number of particles with momentum between $p$ and $p+dp$ and with angle $\theta$ to $\theta + d\theta$. This number would be
+
+$N(p,\theta) = \frac{d^3p}{h^3}g_s f(p) = g_s f(p)\frac{2\pi p^2\sin\theta d\theta dp}{h^3},$
+
+where $g_s$ is the degeracy of the state and $f(p)$ is the probabilty that the state would be occupied. 
 
 Thus,
 
-$P = \int_0^\infty \frac{p v \cos^2\theta}{V} 2\pi \sin\theta d\theta p^2 dp$
+$P = \int_0^\infty \frac{p v \cos^2\theta}{V} g_s f(p)\frac{2\pi p^2 \sin\theta d\theta dp}{h^3} dp.$
 
-or
+To get the average total pressure we integrate over $\theta$
 
-$P = \int_0^\pi \cos^2\theta d\theta\sin\theta \int_0^\infty \frac{p v }{V} 2\pi p^2 dp = \frac{1}{3} \int_0^\infty \frac{p v }{V} 4\pi p^2 dp = \frac{1}{3}\int_0^\infty p v n(p) dp$
+$P = \int_0^\pi d\theta \cos^2\theta \sin\theta \int_0^\infty \frac{p v }{V} \frac{g_s f(p) 2\pi p^2}{h^3} dp = \frac{1}{3} \int_0^\infty \frac{p v }{V} \frac{g_s f(p) 4\pi p^2}{h^3} dp = \frac{1}{3}\int_0^\infty p v n(p) dp$
 
 
-where $n(p) = 4\pi p^2/V$
+where $n(p) = g_s f(p) 4\pi p^2/V.$
 "
 
 # ╔═╡ 6dab1184-6798-11eb-01e2-af1bc7dbdd1d
@@ -89,6 +91,48 @@ Argue why we are justified in using a 'cold' degenerate equation of state to des
 $T \sim 10^4$K (Hint: Show that the degeneracy parameter $\mu/kT \gg 0$, where $\mu$ is the chemical potential and $k$ the Boltzmann
 constant. The density of the white dwarf is $\sim 10^6 g/cm^3$ and the chemical potential $\sim$ the Fermi energy. Assume that
 $\mu_e = 2$)."
+
+# ╔═╡ b8e416ba-6891-11eb-2c92-cdc819988514
+md"We have to basically show that the thermal energy of the electron gas is negligible compared to Fermi energy"
+
+# ╔═╡ 33138330-6892-11eb-36fa-fdb893d1a245
+kB = u"k_au"
+
+# ╔═╡ bd2e2f6e-6894-11eb-1246-db600b48a079
+Temp = 1e4 * u"K"
+
+# ╔═╡ 244ed64c-6892-11eb-3f02-4f264c247878
+ThermalEnergy = uconvert(u"erg", (3/2) * kB * Temp)
+
+# ╔═╡ ae72f48a-6896-11eb-000d-a75c99a66d0c
+h = 2 * pi * u"ħ_au"
+
+# ╔═╡ 9af314b6-6897-11eb-1016-9bcbf7e7a28d
+μe = 2
+
+# ╔═╡ c2d91a0c-6897-11eb-12d9-05df32fef1d9
+amu = 1.66054e-24 * u"g"
+
+# ╔═╡ b9c69186-6896-11eb-3118-3b8a5ed36b65
+ne = 1e6 * u"g/cm^3" / (μe * amu)
+
+# ╔═╡ e29a39f2-6897-11eb-0515-db38cc2614ed
+me = 9.109 * 1e-31 * u"kg"
+
+# ╔═╡ 019fc0f6-6898-11eb-3936-fbfca4d9f508
+c = u"c"
+
+# ╔═╡ f6d01dbc-6895-11eb-2ded-e536398b6f60
+function FermiEnergy(ne, me, h)
+	pF = h * (3 * ne / (8 * pi))^(1/3)
+	sqrt(pF^2 * c^2 + me^2 * c^4)
+end
+
+# ╔═╡ d001849e-6897-11eb-3267-f7fa03a09e80
+Fenergy = uconvert(u"erg", FermiEnergy(ne, me, h))
+
+# ╔═╡ 4a6ca9b8-6899-11eb-390a-8d15b0fe2912
+Fenergy/ThermalEnergy
 
 # ╔═╡ 93d8e972-6799-11eb-0149-ed6bd5c87857
 md"### Problem 3
@@ -344,6 +388,20 @@ massRadius = DataFrame(central_density = ρcs, radius = radii, mass = masses)
 # ╟─73e9d7ec-6793-11eb-3bca-bd8d40ef03d6
 # ╟─b71be1a4-6793-11eb-0012-dba495d16df2
 # ╟─6dab1184-6798-11eb-01e2-af1bc7dbdd1d
+# ╟─b8e416ba-6891-11eb-2c92-cdc819988514
+# ╠═6be49f08-6894-11eb-307f-6d65bf5f9130
+# ╠═33138330-6892-11eb-36fa-fdb893d1a245
+# ╠═bd2e2f6e-6894-11eb-1246-db600b48a079
+# ╠═244ed64c-6892-11eb-3f02-4f264c247878
+# ╠═f6d01dbc-6895-11eb-2ded-e536398b6f60
+# ╠═ae72f48a-6896-11eb-000d-a75c99a66d0c
+# ╠═9af314b6-6897-11eb-1016-9bcbf7e7a28d
+# ╠═c2d91a0c-6897-11eb-12d9-05df32fef1d9
+# ╠═b9c69186-6896-11eb-3118-3b8a5ed36b65
+# ╠═e29a39f2-6897-11eb-0515-db38cc2614ed
+# ╠═019fc0f6-6898-11eb-3936-fbfca4d9f508
+# ╠═d001849e-6897-11eb-3267-f7fa03a09e80
+# ╠═4a6ca9b8-6899-11eb-390a-8d15b0fe2912
 # ╟─93d8e972-6799-11eb-0149-ed6bd5c87857
 # ╟─b98c5b72-6611-11eb-3001-71f3dddb7f23
 # ╟─e1480d1c-660e-11eb-1c29-5decbd0775cd

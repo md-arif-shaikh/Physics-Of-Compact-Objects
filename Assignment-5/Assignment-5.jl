@@ -7,9 +7,6 @@ using InteractiveUtils
 # ╔═╡ b213914c-6fa0-11eb-0ba6-950195900c41
 using DifferentialEquations, CairoMakie, StaticArrays
 
-# ╔═╡ 73341cde-6fab-11eb-1c14-6b12fc1e85b8
-using Unitful, UnitfulAstro
-
 # ╔═╡ 853114f6-6fa0-11eb-39a8-edca713a7c1a
 md"### Assignment 5
 
@@ -120,7 +117,6 @@ end
 # ╠═371db5f2-6fa1-11eb-3546-cf1fa66b48cf
 # ╠═b115c610-6fa6-11eb-3bf9-eb593e3f7d78
 # ╠═83c00ae4-6fa7-11eb-121a-a76e67b869e3
-# ╠═73341cde-6fab-11eb-1c14-6b12fc1e85b8
 # ╠═7bdf068c-6fab-11eb-31fd-b5b610054ccb
 # ╠═eb191c4a-6fab-11eb-18a9-fdad808bddc5
 # ╠═0eb3412c-6fab-11eb-12d0-29d1a35e11ba

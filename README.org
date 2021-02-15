@@ -20,6 +20,6 @@ contributed to this in any way.
 - [[./Assignment-4/assignment-4.jl][Assignment-4]]
 - [[./Assignment-5/Assignment-5.jl][Assignment-5]]
 
-* PDFs/HTML files exported from julia notebooks
+* PDFs exported from julia notebooks
 - [[./Assignment-4/assignment-4-sol.pdf][Assignment-4]]
-- [[./Assignment-5/Assignment-5.jl.html][Assignment-5]]
+- [[./Assignment-5/Assignment-5.pdf][Assignment-5]]

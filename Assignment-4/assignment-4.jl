@@ -227,40 +227,29 @@ begin
 end
 
 # ╔═╡ 75295168-6640-11eb-2f4d-79dbafd7e74c
-md"for fractional $n$ the solver would throw error as negative value of $\theta$ would give complex value for $\theta^n$. Callback function does not work for some reason. Therefore we manually check at every step whether $\theta$ is negative. We stop whenever $\theta < \epsilon$. where $\epsilon$ is a very small number"
+md"for fractional $n$ the solver would throw error as negative value of $\theta$ would give complex value for $\theta^n$. To avoid this problem we can just change $\theta$ in our set of odes to abs($\theta$)."
+
+# ╔═╡ e245dec6-7002-11eb-339f-c590a8afc985
+function laneEmden2(u, n, ξ)
+	θ, ψ = u
+	dθ = ψ
+	dψ = - (2 * ψ / ξ) - abs(θ)^n
+	@SVector [dθ, dψ]
+end
 
 # ╔═╡ c57492b8-6640-11eb-1f31-29cc2440c6e0
 begin
 	pfrac = plot();
 	ns = 0.5:1.0:4.5
+	ξspan2 = [1.0e-10, 30.0]
 	ξ1s = []
 	ψs = []
 	for n in ns
-		θfracsol = []
-		ψfracsol = []
-		ξs = []
-		θfrac = 1.
-		ψfrac = 0.
-		ξ = 1e-8
-		dξ = 1e-4
-		while θfrac > dξ
-			push!(θfracsol, θfrac)
-			push!(ψfracsol, ψfrac)
-			push!(ξs, ξ)
-			θfracini = θfrac
-			ψfracini = ψfrac
-			u0frac = @SVector [θfracini, ψfracini]
-			ξspanfrac = (ξ, ξ+dξ)
-			problem = ODEProblem(laneEmden, u0frac, ξspanfrac, n)
-			sol = solve(problem)
-			θfrac = sol.u[end][1]
-			ψfrac = sol.u[end][2]
-			println(sol)
-			ξ += dξ
-		end
-		plot!(pfrac, ξs, θfracsol, lw = 2, xlabel = L"\xi", ylabel = L"\theta", label = L"n = %$n")
-		push!(ξ1s, (ξ + dξ/2.))
-		push!(ψs, ψfrac)
+		problem = ODEProblem(laneEmden2, u0, ξspan2, n)
+		sol = solve(problem, callback = cb)
+		push!(ξ1s, sol.t[end])
+		push!(ψs, sol[2, :][end])
+		plot!(pfrac, sol.t, sol[1, :], lw = 2, xlabel = L"\xi", ylabel = L"\theta", label = L"n = %$n")
 	end
 end
 
@@ -426,6 +415,7 @@ massRadius = DataFrame(central_density = ρcs, radius = radii, mass = masses)
 # ╠═eb305878-6629-11eb-224c-0775dbfbbe01
 # ╠═c2483324-6629-11eb-096f-892e2660ddbe
 # ╟─75295168-6640-11eb-2f4d-79dbafd7e74c
+# ╠═e245dec6-7002-11eb-339f-c590a8afc985
 # ╠═c57492b8-6640-11eb-1f31-29cc2440c6e0
 # ╠═1d4b843c-66a1-11eb-188c-871b357bfdd7
 # ╠═72c6e67c-66a1-11eb-2171-852cad67d86f

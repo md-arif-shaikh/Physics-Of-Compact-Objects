@@ -1,6 +1,8 @@
-* Physics-Of-Compact-Objects
-Codes and resources for the course on Physics of Compact Objects taught by Prof Ajith at ICTS Jan-April 2021
-
+* About
+  This repo is for codes and resources for the course on **Physics of Compact Objects** taught by Prof Ajith at ICTS Jan-April 2021.
+* References
+  - /Black Holes, White Dwarfs, and Neutron Stars: The Physics of Compact Objects/,  Stuart L. Shapiro Saul A. Teukolsky.
+  - http://www.ucolick.org/~woosley/ay220-19/papers/pols11.pdf
 * Programming Language of choice
   I have chosen [[https://julialang.org/][julia]] to be the main programming language for solving
   all the assignments related to this course. The notebooks are to be
@@ -21,6 +23,7 @@ contributed to this in any way.
 - [[./Assignment-5/Assignment-5.jl][Assignment-5]]
 
 * PDFs
+- [[./Assignment-2/Assignmnet-2.pdf][Assignment-2]]
 - [[./Assignment-4/assignment-4-sol.pdf][Assignment-4]]
 - [[./Assignment-5/Assignment-5-prob-1.pdf][Assignment-5-prob-1]]
 - [[./Assignment-5/Assignment-5.pdf][Assignment-5-prob-2]]

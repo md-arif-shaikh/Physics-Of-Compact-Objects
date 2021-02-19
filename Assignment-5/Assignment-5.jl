@@ -69,9 +69,10 @@ end
 
 # ╔═╡ b115c610-6fa6-11eb-3bf9-eb593e3f7d78
 begin
-	fig = Figure(resolution = (800, 450), fonts = "Times Roman", fontsize = 12)
+	fig = Figure(resolution = (800, 450), font = "Times New Roman", fontsize = 14)
 	ax = fig[1, 1] = Axis(fig, xlabel = "radius [cgs]", ylabel = "density [cgs]")
 	lines!(solution.t, solution[2, :], color = :red)
+	save("./test.pdf", fig)
 	fig
 end
 
@@ -97,7 +98,7 @@ Rsun = 696340 * 1e5
 
 # ╔═╡ 0eb3412c-6fab-11eb-12d0-29d1a35e11ba
 begin
-	figMR = Figure(resolution = (800, 450), fonts = "Times Roman", fontsize = 12)
+	figMR = Figure(resolution = (800, 450), font = "Times New Roman", fontsize = 14)
 	axMR = figMR[1, 1] = Axis(figMR, 
 		ylabel = "radius [km]", 
 		xlabel = "mass [Msun]")

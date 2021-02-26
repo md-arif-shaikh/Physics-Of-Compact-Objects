@@ -1,0 +1,33 @@
+#+TITLE: Using XACT for abstract tensor computer algebra in Mathematica
+#+AUTHOR: Md Arif Shaikh
+#+EMAIL: arifshaikh.astro@gmail.com
+#+DATE: Fri Feb 26 08:02:25 PM IST 2021
+
+* Installation
+The installation guide is here http://xact.es/download/install. Follow
+the steps below.
+  - Download the ~xact~ package from the homepage at
+    http://xact.es/xTensor/.
+  - Extract the compressed file ~tar -xzvf xAct_1.1.4.tgz~.
+  - Place the extracted directory ~xAct~ inside the mathematica
+    installation directory. Follow the below instructions.
+  - In mathematica ~$UserBaseDirectory~ will give the directory where
+    mathematica is installed for the user. There is a dir called
+    ~Applications~. You have to place the ~xAct~ dir inside that
+    directory.
+  - ~mv xAct /home/<user>/.Mathematica/Applications/~.
+  - Linux:
+    - system-wide installation (requires root priviledges):
+      ~/usr/share/Mathematica/Applications/~
+    - single-user installation:
+      ~$HOME/.Mathematica/Applications/~
+  - Mac OS:
+    - system-wide installation (requires root priviledges):
+      ~/Library/Mathematica/Applications/~
+    - single-user installation:
+      ~/Users/<user>/Library/Mathematica/Applications/~
+* Using
+Once the installation is done, open a mathematica notebook and use
+~<<xAct`xTensor`~ to load the ~xAct~ package.
+* Refs
+  - [[https://www.researchgate.net/profile/George-Hrabovsky/publication/282667453_GR_Calculations_in_Specific_Bases_in_Mathematica/links/5617a63908ae0224ebce9a9e/GR-Calculations-in-Specific-Bases-in-Mathematica.pdf][GR Calculations in Specific Bases Using Mathematica]] by George E. Hrabovsky.

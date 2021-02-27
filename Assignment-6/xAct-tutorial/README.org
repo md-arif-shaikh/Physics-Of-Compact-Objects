@@ -58,5 +58,31 @@ DefMetric[-1, metric[-α, -β], CD, {";", "∇"}]
 ~-1~ is the sign of the determinant of the metric.
 
 [[./figs/def-metric.png]]
+
+** Define a chart on the manifold
+We want to work in a particular coordinate basis. We will work in the
+spherical polar coordinate basis. For this we need to define our
+chart. This is done using the function ~DefChart~
+#+BEGIN_SRC wolfram
+DefChart[cb, M4, {0, 1, 2, 3}, {t[], r[], θ[], φ[]}]
+#+END_SRC
+
+The arguments are the name for our chart ~cb~, the manifold ~M4~ on which
+we are defining this chart, indices for the coordinate and
+coordinates.
+
+[[./figs/def-chart.png]] 
+
+** Define scalar functions
+We also need to define any scalar functions we will need later. For
+the stationary spherically symmetric space time we need to define the
+two scalar functions ~Λ~ and ~Φ~. We use the function
+~DefScalarFunction~ to define these.
+#+BEGIN_SRC wolfram
+DefScalarFunction[Λ]
+DefScalarFunction[Φ]
+#+END_SRC
+
+[[./figs/def-scalar.png]]
 * Refs
   - [[https://www.researchgate.net/profile/George-Hrabovsky/publication/282667453_GR_Calculations_in_Specific_Bases_in_Mathematica/links/5617a63908ae0224ebce9a9e/GR-Calculations-in-Specific-Bases-in-Mathematica.pdf][GR Calculations in Specific Bases Using Mathematica]] by George E. Hrabovsky.

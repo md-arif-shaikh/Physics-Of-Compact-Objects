@@ -36,7 +36,7 @@ these two packages which are bundled inside the ~xAct~ package.
 Once the installation is done, open a mathematica notebook and use
  - ~<<xAct`xTensor`~ to load the ~xTensor~ package.
  - ~<<xAct`xCoba`~ to load the ~xCoba~ package.
-** Define our manifold
+** Define a manifold
 The first step is to define our manifold. We give a name for our
 manifold, dimension of the manifold and a set of abstract indices for
 the tensor on this manifold. The manifold is defined using the
@@ -47,7 +47,16 @@ DefManifold[M4, 4, {α,β,γ,μ,ν,λ,σ,η}]
 ~M4~ is the manifold we are defining, ~4~ is the dimension of this
 manifold and the greek symbols are abstract indices for the tensors on
 this manifold.
+
 [[./figs/def-manifold.png]]
-** 
+** Define a metric on the manifold
+Now that we have defined our manifold, we will now define a metric on
+this manifold. We do this using the ~ DefMetric~ function.
+#+BEGIN_SRC wolfram
+DefMetric[-1, metric[-α, -β], CD, {";", "∇"}]
+#+END_SRC
+~-1~ is the sign of the determinant of the metric.
+
+[[./figs/def-metric.png]]
 * Refs
   - [[https://www.researchgate.net/profile/George-Hrabovsky/publication/282667453_GR_Calculations_in_Specific_Bases_in_Mathematica/links/5617a63908ae0224ebce9a9e/GR-Calculations-in-Specific-Bases-in-Mathematica.pdf][GR Calculations in Specific Bases Using Mathematica]] by George E. Hrabovsky.

@@ -39,7 +39,11 @@ Once the installation is done, open a mathematica notebook and use
 ** Define our manifold
 The first step is to define our manifold. We give a name for our
 manifold, dimension of the manifold and a set of abstract indices for
-the tensor on this manifold.
+the tensor on this manifold. The manifold is defined using the
+function ~DefManifold~.
+#+BEGIN_SRC wolfram
+DefManifold[M4, 4, {α,β,γ,μ,ν,λ,σ,η}]
+#+END_SRC
 [[./figs/def-manifold.png]]
 * Refs
   - [[https://www.researchgate.net/profile/George-Hrabovsky/publication/282667453_GR_Calculations_in_Specific_Bases_in_Mathematica/links/5617a63908ae0224ebce9a9e/GR-Calculations-in-Specific-Bases-in-Mathematica.pdf][GR Calculations in Specific Bases Using Mathematica]] by George E. Hrabovsky.

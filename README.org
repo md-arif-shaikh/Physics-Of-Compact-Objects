@@ -3,27 +3,31 @@
 * References
   - /Black Holes, White Dwarfs, and Neutron Stars: The Physics of Compact Objects/,  Stuart L. Shapiro Saul A. Teukolsky.
   - http://www.ucolick.org/~woosley/ay220-19/papers/pols11.pdf
-* Programming Language of choice
-  I have chosen [[https://julialang.org/][julia]] to be the main programming language for solving
-  all the assignments related to this course. The notebooks are to be
-  run with [[https://github.com/fonsp/Pluto.jl][Pluto]]. Insturctions for installing and running Pluto could
-  be found in the github repo. For convenience of viewing I have also
-  uploaded the pdf versions of the notebooks. Links to the exported
-  pdfs are given below.
+* Programming Languages
+  - [[https://julialang.org/][julia]] is the preferred language for solving all the numerical
+    tasks in the assignments related to this course. The notebooks are
+    to be run with [[https://github.com/fonsp/Pluto.jl][Pluto]]. Insturctions for installing and running
+    Pluto could be found in the github repo. For convenience of
+    viewing I have also uploaded the pdf versions of the
+    notebooks. Links to the exported pdfs are given below.
+  - Mathematica is used for analytical calculations.
+  - Python is used where the required packages are not available or
+    not mature enough in the julia ecosystem.
 
 * Main pdf containing the assignments
 This pdf is prepared by Prof. Ajith for the course and I have not
 contributed to this in any way.
 - [[./CompactObjTutorial.pdf][Assignments]]
 
-* Julia notebooks containing solutions
+* Notebooks containing solutions
 - [[./Assignment-1/assignment-1.jl][Assignment-1]]
 - [[./Assignment-3/assignment-3.jl][Assignment-3]]
 - [[./Assignment-4/assignment-4.jl][Assignment-4]]
 - [[./Assignment-5/Assignment-5.jl][Assignment-5]]
-
+- [[./Assignment-6/xAct-tutorial/neutron-star-tov-xAct.nb][Assignment-6]]
 * PDFs
 - [[./Assignment-2/Assignmnet-2.pdf][Assignment-2]]
 - [[./Assignment-4/assignment-4-sol.pdf][Assignment-4]]
 - [[./Assignment-5/Assignment-5-prob-1.pdf][Assignment-5-prob-1]]
 - [[./Assignment-5/Assignment-5.pdf][Assignment-5-prob-2]]
+- [[./Assignment-6/xAct-tutorial/neutron-star-tov-xAct.pdf][Assignment-6-mathematica-notebook]]

@@ -26,7 +26,7 @@ the steps below.
       ~/Library/Mathematica/Applications/~
     - single-user installation:
       ~/Users/<user>/Library/Mathematica/Applications/~
-* Usage
+* Using xAct to derive the TOV equation
 ** Package needed for the current tutorial
 In the current tutorial we want to compute the components of the
 Einstein tensor in a particular basis. ~xTensor~ does not do this. For

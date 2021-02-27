@@ -29,7 +29,7 @@ the steps below.
 * Usage
 ** Package needed for the current tutorial
 In the current tutorial we want to compute the components of the
-Eienstein tensor in a particular basis. ~xTensor~ does not do this. For
+Einstein tensor in a particular basis. ~xTensor~ does not do this. For
 this we need ~xCoba~ which performs component calculations. However,
 ~xCoba~ needs ~xTensor~ for it's internal calculations. So we need
 these two packages which are bundled inside the ~xAct~ package. 
@@ -48,7 +48,6 @@ DefManifold[M4, 4, {α,β,γ,μ,ν,λ,σ,η}]
 manifold and the greek symbols are abstract indices for the tensors on
 this manifold.
 
-[[./figs/def-manifold.png]]
 ** Define a metric on the manifold
 Now that we have defined our manifold, we will now define a metric on
 this manifold. We do this using the ~ DefMetric~ function.
@@ -56,8 +55,6 @@ this manifold. We do this using the ~ DefMetric~ function.
 DefMetric[-1, metric[-α, -β], CD, {";", "∇"}]
 #+END_SRC
 ~-1~ is the sign of the determinant of the metric.
-
-[[./figs/def-metric.png]]
 
 ** Define a chart on the manifold
 We want to work in a particular coordinate basis. We will work in the
@@ -71,8 +68,6 @@ The arguments are the name for our chart ~cb~, the manifold ~M4~ on which
 we are defining this chart, indices for the coordinate and
 coordinates.
 
-[[./figs/def-chart.png]] 
-
 ** Define scalar functions
 We also need to define any scalar functions we will need later. For
 the stationary spherically symmetric space time we need to define the
@@ -83,6 +78,21 @@ DefScalarFunction[Λ]
 DefScalarFunction[Φ]
 #+END_SRC
 
-[[./figs/def-scalar.png]]
+** Write down our metric in the coordinates
+Now that we are set, let's write the metric in the coordinates. This
+we do by first writing the metric in a matrix form.
+#+BEGIN_SRC wolfram
+met = DiagonalMatrix[{-Exp[2 Φ[r[]]], Exp[2 Λ[r[]]], r[]^2, r[]^2 Sin[θ[]]^2}]
+#+END_SRC
+After that we define a ~CTensor~ from the ~met~ in our coordinate
+basis ~cb~
+#+BEGIN_SRC wolfram
+g = CTensor[met, {-cb, -cb}]
+#+END_SRC
+and then set ~g~ as the metric for vector bundle of the basis ~cb~.
+
+* Notebook and PDF
+ - [[./neutron-star-tov-xAct.nb][Notebook]]
+ - [[./neutron-star-tov-xAct.pdf][PDF version of the notebook]]
 * Refs
-  - [[https://www.researchgate.net/profile/George-Hrabovsky/publication/282667453_GR_Calculations_in_Specific_Bases_in_Mathematica/links/5617a63908ae0224ebce9a9e/GR-Calculations-in-Specific-Bases-in-Mathematica.pdf][GR Calculations in Specific Bases Using Mathematica]] by George E. Hrabovsky.
+  - [[http://www.madscitech.org/GRBasis.pdf][GR Calculations in Specific Bases Using Mathematica]] by George E. Hrabovsky.

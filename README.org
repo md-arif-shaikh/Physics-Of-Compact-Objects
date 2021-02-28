@@ -1,3 +1,11 @@
+* Table of Contents                                                     :TOC:
+- [[#about][About]]
+- [[#references][References]]
+- [[#programming-languages][Programming Languages]]
+- [[#main-pdf-containing-the-assignments][Main pdf containing the assignments]]
+- [[#notebooks-containing-solutions][Notebooks containing solutions]]
+- [[#pdfs][PDFs]]
+
 * About
   This repo is for codes and resources for the course on *Physics of Compact Objects* taught by Prof Ajith at ICTS Jan-April 2021.
 * References

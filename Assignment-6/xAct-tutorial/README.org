@@ -3,6 +3,18 @@
 #+EMAIL: arifshaikh.astro@gmail.com
 #+DATE: Fri Feb 26 08:02:25 PM IST 2021
 
+* Table of Contents                                                     :TOC:
+- [[#installation][Installation]]
+- [[#using-xact-to-derive-the-tov-equation][Using xAct to derive the TOV equation]]
+  - [[#package-needed-for-the-current-tutorial][Package needed for the current tutorial]]
+  - [[#define-a-manifold][Define a manifold]]
+  - [[#define-a-metric-on-the-manifold][Define a metric on the manifold]]
+  - [[#define-a-chart-on-the-manifold][Define a chart on the manifold]]
+  - [[#define-scalar-functions][Define scalar functions]]
+  - [[#write-down-our-metric-in-the-coordinates][Write down our metric in the coordinates]]
+- [[#notebook-and-pdf][Notebook and PDF]]
+- [[#refs][Refs]]
+
 * Installation
 The installation guide is here http://xact.es/download/install. Follow
 the steps below.

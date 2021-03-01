@@ -12,15 +12,13 @@
   - /Black Holes, White Dwarfs, and Neutron Stars: The Physics of Compact Objects/,  Stuart L. Shapiro Saul A. Teukolsky.
   - http://www.ucolick.org/~woosley/ay220-19/papers/pols11.pdf
 * Programming Languages
-  - [[https://julialang.org/][julia]] is the preferred language for solving all the numerical
-    tasks in the assignments related to this course. The notebooks are
-    to be run with [[https://github.com/fonsp/Pluto.jl][Pluto]]. Insturctions for installing and running
+The assignments are solved using
+  - [[https://julialang.org/][julia]] in the form of [[https://github.com/fonsp/Pluto.jl][Pluto]] notebooks. Insturctions for installing and running
     Pluto could be found in the github repo. For convenience of
-    viewing I have also uploaded the pdf versions of the
-    notebooks. Links to the exported pdfs are given below.
-  - Mathematica is used for analytical calculations.
-  - Python is used where the required packages are not available or
-    not mature enough in the julia ecosystem.
+    viewing, pdf versions of the
+    notebooks are also uploaded. Links to the exported pdfs are given below.
+  - [[https://www.wolfram.com/mathematica/][Mathematica]] Notebooks.
+  - [[https://www.python.org/][Python]] scripts and [[https://jupyter.org/][jupyter]] notebooks.
 
 * Main pdf containing the assignments
 This pdf is prepared by Prof. Ajith for the course and I have not

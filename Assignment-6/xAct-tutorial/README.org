@@ -104,7 +104,7 @@ g = CTensor[met, {-cb, -cb}]
 and then set ~g~ as the metric for vector bundle of the basis ~cb~.
 
 * Notebook and PDF
- - [[./neutron-star-tov-xAct.nb][Notebook]]
+ - [[./tov-xAct.nb][Notebook]]
  - [[./neutron-star-tov-xAct.pdf][PDF version of the notebook]]
 * Refs
   - [[http://www.madscitech.org/GRBasis.pdf][GR Calculations in Specific Bases Using Mathematica]] by George E. Hrabovsky.

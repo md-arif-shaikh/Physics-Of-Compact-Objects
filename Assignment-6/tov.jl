@@ -131,7 +131,7 @@ scatter(radiiNewt ./ 1e5, MassesNewt ./ Msun, zcolor=log10.(ρcs),
 	label=L"$\textrm{central density}$")
 
 # ╔═╡ 36e57fc4-81a9-11eb-21fe-654f42968a86
-md"## Solve TOV: Case 1
+md"## Solve TOV
 
 We solve solve the TOV equation in this section using the same equation of state as the earlier section."
 
@@ -217,91 +217,6 @@ begin
 	scatter!(pTOVvsNewt, radiiTOV ./ 1e5, MassesTOV ./ Msun, zcolor=log10.(ρcs), markershape =:square, label=L"$\textrm{TOV}$")
 end
 
-# ╔═╡ 18e64b4c-81af-11eb-0757-47bd91603d06
-md"### Solve TOV: Case 2
-
-We solve the TOV for one of the realistic Neutron star equation of states, namely SLy."
-
-# ╔═╡ 1a190bd0-83c4-11eb-278f-81628d9f818f
-md"First let us downlaod the data using julia utitlity such as HTTP"
-
-# ╔═╡ d5358d76-83c6-11eb-1cbb-5b8da156e2ce
-df = CSV.File(HTTP.get("http://www.ioffe.ru/astro/NSG/NSEOS/sly4.dat").body;
-    header=false,skipto=7,delim=" ",ignorerepeated=true)
-
-# ╔═╡ 0989088c-83c7-11eb-1eff-b532874bb091
-md"column3 is the density and column 4 is the pressure in cgs units. Since we need the p as a function of ρ we will interpolate the p."
-
-# ╔═╡ c7147610-83c8-11eb-0ac6-730563f1a04a
-ρSLy = df.Column3
-
-# ╔═╡ 7e88240e-83c9-11eb-2248-15d4da1ac62d
-pSLy = df.Column4
-
-# ╔═╡ 6b709b54-83c8-11eb-13c1-0da2153e0aac
-plog_interp = interpolate((log10.(ρSLy),), log10.(pSLy), Gridded(Linear()))
-
-# ╔═╡ 8a3d09b8-83c9-11eb-2110-83bd65528e6a
-ρlog_interp = interpolate((log10.(pSLy),), log10.(ρSLy), Gridded(Linear()))
-
-# ╔═╡ b4666814-83cc-11eb-27c1-2714f6d02638
-ρlog_exterp = extrapolate(ρlog_interp, Line())
-
-# ╔═╡ 7590802e-83d0-11eb-31a4-59858f85743c
-ρ_interp(p) = 10^(ρlog_exterp(log10(abs(p))))
-
-# ╔═╡ b1402110-83d0-11eb-1e61-addb56b37eda
-p_interp(ρ) = 10^(plog_interp(log10(abs(ρ))))
-
-# ╔═╡ 461500c2-83c9-11eb-3bce-9f3af623761e
-md"Unlike before we will solve for m and p instead of m and ρ. So our now the event location is where pressure p becomes zero."
-
-# ╔═╡ b1faf5b2-83c8-11eb-19d2-bf79e95dbe55
-function tovSLy(u, params, r)
-	m, p = u
-	G, C = params
-	ρ = ρ_interp(p)
-    dmdr = 4 * pi * r^2 * ρ
-    dpdr = - (G * m * ρ / r^2) * (1 + (p/(C^2 * ρ))) * (1 + (4* pi * r^3 * p/(C^2 * m))) * (1 - (2 * G * m/(C^2 * r)))^(-1)
-	@SVector [dmdr, dpdr]
-end
-
-# ╔═╡ ac04e2e4-83c9-11eb-0848-a5509d39b134
-conditionSLy(u, r, integrator) = u[2]
-
-# ╔═╡ c3757474-83c9-11eb-0084-e75e47fca316
-cbSLy = ContinuousCallback(conditionSLy, affect!)
-
-# ╔═╡ f4f39308-83c9-11eb-2cfd-71335de54d22
-md"we need to now specify the initial conditions and range of integration. We will choose a smaller range since for neutron star the radius is expected to at smaller value."
-
-# ╔═╡ 1a787080-83ca-11eb-36aa-67de913dcb52
-begin
-	ρcSLy = 1e15
-	u0SLy = @SVector [1e-10, p_interp(ρcSLy)]
-	rspanSLy = [1e-10, 1e8]
-end
-
-# ╔═╡ dae3f700-83c9-11eb-2d90-454aa644f10e
-problemSLy = ODEProblem(tovSLy, u0SLy, rspanSLy, [G, c])
-
-# ╔═╡ 9bdc6b36-83ca-11eb-11fc-3336722450b5
-solveSLy = solve(problemSLy, alg_hint=:stiff, callback=cbSLy)
-
-# ╔═╡ ed06ccc8-83ce-11eb-0d48-1b0321a68567
-solveSLy.t[end]/1e5
-
-# ╔═╡ f5dd09d2-83ce-11eb-0e08-cda8fb30830a
-solveSLy[1,:][end]
-
-# ╔═╡ b8a145b6-83ca-11eb-0418-1d91b983a3e5
-plot(solveSLy.t/1e5, solveSLy[1, :]/Msun, legend=:topleft)
-
-# ╔═╡ db7277ca-83d1-11eb-36e5-190d0ab5e486
-md"### Comments
-
-This result for SLy does not seem to agree with the expected values where the mass ~ 1-2 Msun. The reason could be that the the equation of state is not extrapolated nicely, we are doing linear extrapolation which might not be good enough. In scipy.interp1d we used exptrapolate option and got correct result. Need further investigations."
-
 # ╔═╡ Cell order:
 # ╟─708f50ea-81a6-11eb-1cd8-477238b61afe
 # ╠═3f352894-81a6-11eb-3fd7-0333460c112f
@@ -352,8 +267,6 @@ This result for SLy does not seem to agree with the expected values where the ma
 # ╠═6b709b54-83c8-11eb-13c1-0da2153e0aac
 # ╠═8a3d09b8-83c9-11eb-2110-83bd65528e6a
 # ╠═b4666814-83cc-11eb-27c1-2714f6d02638
-# ╠═7590802e-83d0-11eb-31a4-59858f85743c
-# ╠═b1402110-83d0-11eb-1e61-addb56b37eda
 # ╟─461500c2-83c9-11eb-3bce-9f3af623761e
 # ╠═b1faf5b2-83c8-11eb-19d2-bf79e95dbe55
 # ╠═ac04e2e4-83c9-11eb-0848-a5509d39b134
@@ -364,5 +277,5 @@ This result for SLy does not seem to agree with the expected values where the ma
 # ╠═9bdc6b36-83ca-11eb-11fc-3336722450b5
 # ╠═ed06ccc8-83ce-11eb-0d48-1b0321a68567
 # ╠═f5dd09d2-83ce-11eb-0e08-cda8fb30830a
+# ╠═b7cd8fa2-8729-11eb-1c6a-c5742b33b554
 # ╠═b8a145b6-83ca-11eb-0418-1d91b983a3e5
-# ╟─db7277ca-83d1-11eb-36e5-190d0ab5e486

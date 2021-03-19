@@ -20,7 +20,7 @@ contributed to this in any way.
 - [[./Assignment-3/assignment-3.jl][Assignment-3]]
 - [[./Assignment-4/assignment-4.jl][Assignment-4]]
 - [[./Assignment-5/Assignment-5.jl][Assignment-5]]
-- [[./Assignment-6/xAct-tutorial/neutron-star-tov-xAct.nb][Assignment-6-derive-TOV]]. Click [[./Assignment-6][here]] to learn more about tensor computations using ~xTensor~ and ~xCoba~ packages from ~xAct.~
+- [[./Assignment-6/xAct-tutorial/neutron-star-tov-xAct.nb][Assignment-6-derive-TOV]]. Click [[[./Assignment-6/xAct-tutorial][here]] to learn more about tensor computations using ~xTensor~ and ~xCoba~ packages from ~xAct.~
 - [[./Assignment-6/tov.ipynb][Assignment-6-solve-TOV]] for solving TOV equation using python (uses ~solve_ivp~ from ~scipy~).
 - [[./Assignment-6/tov-sly.jl][Assignment-6-solve-TOV-SLy]] for solving TOV equation for neutron star using ~SLy~ equation of state using Julia (uses ~DifferentialEquations~ package).
 - [[./Assignment-7/geodesics-BHPToolkit.nb][Geodesics using Black Hole Perturbation Toolkit]]. Click [[./Assignment-7][here]] to learn more about tensor computations in coordinate basis using Black Hole Perturbation Toolkit.

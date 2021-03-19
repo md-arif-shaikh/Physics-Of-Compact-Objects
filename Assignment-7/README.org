@@ -45,8 +45,8 @@
      <<GeneralRelativityTensors`
      #+END_SRC
 ** How to see available functions
-   Simply to help in the mathematica menu and click ~~wolfram
-   documentation~~ and search for ~~GeneralRelativityTensors~~ and you
+   Simply to help in the mathematica menu and click ~wolfram
+   documentation~ and search for ~GeneralRelativityTensors~ and you
    will see the available functions and utilities.
 * Geodesic equations in Schwarzschild metric
 * Notebook

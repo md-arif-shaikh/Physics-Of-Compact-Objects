@@ -1,0 +1,53 @@
+#+TITLE: Geodesics in Schwarzschild metric using Black Hole Perturbation Toolkit 
+#+AUTHOR: Md Arif Shaikh
+#+EMAIL: arifshaikh.astro@gmail.com
+#+DATE: Fri Mar 19 06:31:43 PM IST 2021
+
+* Table of contents                                                     :TOC:
+- [[#black-hole-perturbation-toolkit][Black Hole Perturbation Toolkit]]
+  - [[#what-is-it][What is it]]
+  - [[#how-to-install-it][How to install it]]
+  - [[#how-to-see-available-functions][How to see available functions]]
+- [[#geodesic-equations-in-schwarzschild-metric][Geodesic equations in Schwarzschild metric]]
+- [[#notebook][Notebook]]
+
+* Black Hole Perturbation Toolkit
+** What is it 
+   [[https://bhptoolkit.org/][Black Hole Perturbation Toolkit]] (BHPToolKit) is a collection of softwares usefull
+   for doing computations related to Black Hole Physics. There are
+   different modules to do  different set of works. In this tutorial we
+   will make use of the module [[https://bhptoolkit.org/GeneralRelativityTensors/][GeneralRelativityTensors]] to set the
+   equations for geodesics in Schwarzschild metric. However it could be
+   generalized to any other metric in a coordinate basis.
+** How to install it
+   [[https://bhptoolkit.org/GeneralRelativityTensors/][GeneralRelativityTensors]] could be installed simply following the
+   steps mentioned in the official webpage
+   [[https://bhptoolkit.org/mathematica-install.html]]. For, completeness,
+   the steps are given below
+   - Add the BHPToolkit server. For Mathematica 12.1 or newer
+     #+BEGIN_SRC wolfram
+     PacletSiteRegister["https://pacletserver.bhptoolkit.org", "Black Hole Perturbation Toolkit Paclet Server"]
+     #+END_SRC
+     for Mathematica 12.0 or older
+     #+BEGIN_SRC wolfram
+     PacletSiteAdd["http://pacletserver.bhptoolkit.org", "Black Hole Perturbation Toolkit Paclet Server"]
+     #+END_SRC
+   - Get an updated list of packages available on the server.
+     #+BEGIN_SRC wolfram
+     PacletSiteUpdate["https://pacletserver.bhptoolkit.org"]
+     #+END_SRC
+   - Install package
+     #+BEGIN_SRC wolfram
+     PacletInstall["GeneralRelativityTensors"]
+     #+END_SRC
+   - Load package
+     #+BEGIN_SRC wolfram
+     <<GeneralRelativityTensors`
+     #+END_SRC
+** How to see available functions
+   Simply to help in the mathematica menu and click ~~wolfram
+   documentation~~ and search for ~~GeneralRelativityTensors~~ and you
+   will see the available functions and utilities.
+* Geodesic equations in Schwarzschild metric
+* Notebook
+  - Mathematica notebook [[./geodesics-BHPToolkit.nb][link]].

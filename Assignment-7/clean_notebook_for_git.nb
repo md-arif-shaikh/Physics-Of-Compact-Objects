@@ -1,0 +1,91 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2793,         83]
+NotebookOptionsPosition[      2505,         70]
+NotebookOutlinePosition[      2840,         85]
+CellTagsIndexPosition[      2797,         82]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"https", ":"}], "//", 
+    RowBox[{
+     RowBox[{"bhptoolkit", ".", "org"}], "/", 
+     RowBox[{"cleannb", ".", "html"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CleanNotebook", "[", "file_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"nb", ",", "contents", ",", "newcontents"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"nb", "=", 
+        RowBox[{"NotebookOpen", "[", "file", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"SetOptions", "[", 
+        RowBox[{"nb", ",", 
+         RowBox[{"\"\<TrackCellChangeTimes\>\"", "\[Rule]", "False"}], ",", 
+         RowBox[{"PrivateNotebookOptions", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"\"\<FileOutlineCache\>\"", "\[Rule]", "False"}], 
+           "}"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"contents", "=", 
+        RowBox[{"NotebookGet", "[", "nb", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"newcontents", "=", 
+        RowBox[{"contents", "/.", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"CellChangeTimes", "\[Rule]", "_"}], ")"}], "\[Rule]", 
+            RowBox[{"Sequence", "[", "]"}]}], ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"CellTags", "\[Rule]", "_"}], ")"}], "\[Rule]", 
+            RowBox[{"Sequence", "[", "]"}]}]}], "}"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"NotebookPut", "[", 
+        RowBox[{"newcontents", ",", "nb"}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"NotebookSave", "[", "nb", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"NotebookClose", "[", "nb", "]"}], ";"}]}], "]"}]}], 
+   ";"}]}]], "Input",
+ CellChangeTimes->{{3.8251573811081038`*^9, 
+  3.825157417806369*^9}},ExpressionUUID->"f554e059-57b5-4a89-b767-\
+4e127590b25b"]
+},
+WindowSize->{808, 910},
+WindowMargins->{{278, Automatic}, {Automatic, 59}},
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1943, 48, 239, "Input",ExpressionUUID->"f554e059-57b5-4a89-b767-4e127590b25b"]
+}
+]
+*)
+

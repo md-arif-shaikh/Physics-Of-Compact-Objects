@@ -1,7 +1,6 @@
 * Table of Contents                                                     :TOC:
 - [[#about][About]]
 - [[#references][References]]
-- [[#programming-languages][Programming Languages]]
 - [[#main-pdf-containing-the-assignments][Main pdf containing the assignments]]
 - [[#notebooks-containing-solutions][Notebooks containing solutions]]
 - [[#pdfs][PDFs]]
@@ -11,15 +10,6 @@
 * References
   - /Black Holes, White Dwarfs, and Neutron Stars: The Physics of Compact Objects/,  Stuart L. Shapiro Saul A. Teukolsky.
   - http://www.ucolick.org/~woosley/ay220-19/papers/pols11.pdf
-* Programming Languages
-The assignments are solved using
-  - [[https://julialang.org/][julia]] in the form of [[https://github.com/fonsp/Pluto.jl][Pluto]] notebooks. Insturctions for installing and running
-    Pluto could be found in the github repo. For convenience of
-    viewing, pdf versions of the
-    notebooks are also uploaded. Links to the exported pdfs are given below.
-  - [[https://www.wolfram.com/mathematica/][Mathematica]] Notebooks.
-  - [[https://www.python.org/][Python]] scripts and [[https://jupyter.org/][jupyter]] notebooks.
-
 * Main pdf containing the assignments
 This pdf is prepared by Prof. Ajith for the course and I have not
 contributed to this in any way.
@@ -30,12 +20,14 @@ contributed to this in any way.
 - [[./Assignment-3/assignment-3.jl][Assignment-3]]
 - [[./Assignment-4/assignment-4.jl][Assignment-4]]
 - [[./Assignment-5/Assignment-5.jl][Assignment-5]]
-- [[./Assignment-6/xAct-tutorial/neutron-star-tov-xAct.nb][Assignment-6-derive-TOV]]
-- [[./Assignment-6/tov.ipynb][Assignment-6-solve-TOV]]
-- [[./Assignment-7/geodesics-BHPToolkit.nb][Geodesics using Black Hole Perturbation Toolkit]]
+- [[./Assignment-6/xAct-tutorial/neutron-star-tov-xAct.nb][Assignment-6-derive-TOV]]. Click [[./Assignment-6][here]] to learn more about tensor computations using ~xTensor~ and ~xCoba~ packages from ~xAct.~
+- [[./Assignment-6/tov.ipynb][Assignment-6-solve-TOV]] for solving TOV equation using python (uses ~solve_ivp~ from ~scipy~).
+- [[./Assignment-6/tov-sly.jl][Assignment-6-solve-TOV-SLy]] for solving TOV equation for neutron star using ~SLy~ equation of state using Julia (uses ~DifferentialEquations~ package).
+- [[./Assignment-7/geodesics-BHPToolkit.nb][Geodesics using Black Hole Perturbation Toolkit]]. Click [[./Assignment-7][here]] to learn more about tensor computations in coordinate basis using Black Hole Perturbation Toolkit.
 * PDFs
 - [[./Assignment-2/Assignmnet-2.pdf][Assignment-2]]
 - [[./Assignment-4/assignment-4-sol.pdf][Assignment-4]]
 - [[./Assignment-5/Assignment-5-prob-1.pdf][Assignment-5-prob-1]]
 - [[./Assignment-5/Assignment-5.pdf][Assignment-5-prob-2]]
 - [[./Assignment-6/xAct-tutorial/neutron-star-tov-xAct.pdf][Assignment-6-mathematica-notebook]]
+- [[./Assignment-7/geodesics-BHPToolkit.pdf][Geodesics in Schwarzschild metric using BHPtoolkit]]

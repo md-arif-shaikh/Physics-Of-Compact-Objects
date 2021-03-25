@@ -1,0 +1,34 @@
+\documentclass[10pt]{revtex4-2}
+
+\begin{document}
+\title{Frobenius's Theorem}
+\author{Md Arif Shaikh}
+\date{\today}
+\maketitle
+
+A vector $\xi^\alpha$ is said to be a Killing vector if the Lie derivative of the metric $g_{\alpha\beta}$ along the given vector vanishes. This gives the Killing equation
+\begin{equation}
+  \label{eq:killing-equation}
+  \nabla_\alpha \xi_\beta + \nabla_\beta\xi_\alpha = 0,
+\end{equation}
+which basically implies that the tensor $\nabla_\alpha\xi_\beta$ must be anti-symmetric. A spacetime is said to be stationary if it possesses a time-like Killing vector. It is static if this time-like Killing vector is hypersurface orthogonal. Now a vector $u^\alpha$ is called hypersurface orthogonal if there exists a hypersurface whose normal $n^\alpha$ is everywhere proportional to $u^\alpha$. The necessary and sufficient condition for a vector to be hypersurface orthogonal is given by the Frobenius's theorem which demands that the completely anti-symmetric tensor $u_{[\alpha;\beta}u_{\gamma]}$ should vanish. So the condition becomes
+\begin{equation}
+  \label{eq:frobenius-theorem}
+  u_{[\alpha;\beta}u_{\gamma]} = 0.
+\end{equation}
+
+\begin{enumerate}
+\item Consider the Schwarzschild metric in the ingoing Eddington-Finkelstein coordinates
+  \begin{equation}
+    \label{eq:EF}
+    ds^2 = -\left(1 - \frac{2 M}{r} \right)dv^2 + 2 dv dr + r^2 d\Omega^2
+  \end{equation}
+  \begin{itemize}
+  \item Show that $\xi^\alpha\partial_\alpha = \partial_v$ is a Killing vector. (Show that it satisfies the Killing equation (\ref{eq:killing-equation})).
+  \item Show that $\xi^\alpha$ is time-like for $r>2M$.
+  \item Show that $\xi^\alpha$ is hypersurface orthogonal, i.e., it satisfies equation (\ref{eq:frobenius-theorem}). This would imply that the spacetime is a static.
+  \end{itemize}
+\item Repeat the previous exercise for the Kerr metric in Boyer-Lindquist coordinates. Take the Killing vector $\xi^\alpha\partial_\alpha = \partial_t$. Is it hypersurface surface orthogonal?
+\item Show that the quantity $\xi_\alpha u^\alpha$ is conserved, where $\xi^\alpha$ is a Killing vector and $u^\alpha$ is the four-velocity. Find the conserved quantities for Schwarzschild and Kerr metric the Killing vectors $\partial_t$ and $\partial_\phi$. 
+\end{enumerate}
+\end{document}

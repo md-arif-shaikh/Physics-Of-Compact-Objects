@@ -1,0 +1,20 @@
+#+TITLE: Testing hypersurface orthogonality
+#+AUTHOR: Md Arif Shaikh
+
+* Hypersurface Orthogonality: Frobenius theorem
+** Stationary and static spacetime
+   In general relativity, a spacetime
+   which possesses a time-like Killing vector is said to be a stationary
+   spacetime. In addition to this, if the time-like Killing vector is
+   hypersurface orthogonal then the spacetime is said to be
+   static. Example of stationary spacetime are the Schwarzschild and Kerr
+   spacetime. The Schwarzschild spacetime is also a static spacetime
+   since the it possesses a hypersurface orthogonal time like Killing
+   vector. However, there is time-like Killing vector in Kerr spacetime
+   which is hypersurface orthogonal and hence it is not static.
+** Frobenius theorem
+   Frobenius theorem is a necessary and sufficient condition  to check that
+   a vector is hypersurface orthogonal. A vector is hypersurface
+   orthogonal if there exists a hypersurface such that the vector is
+   every where proportional to the normal to this hypersurface.
+
